@@ -522,17 +522,11 @@ async function buyStock(index) {
   if (!canBuy >= 1) {
     return;
   }
-  if (canBuy >= buyNum) {
-    money -=
-      buyNum * Number(stockValues[index][0][stockValues[index][0].length - 1]);
+  else {
+    let bought = Math.min(canBuy, buyNum);
+    money -= bought * Number(stockValues[index][0][stockValues[index][0].length - 1]);
     stockValues[index][3] = Number(stockValues[index][3]);
-    stockValues[index][3] += buyNum;
-  }
-  if (canBuy < buyNum) {
-    money -=
-      canBuy * Number(stockValues[index][0][stockValues[index][0].length - 1]);
-    stockValues[index][3] = Number(stockValues[index][3]);
-    stockValues[index][3] += canBuy;
+    stockValues[index][3] += bought;
   }
   const date = new Date();
   if (
@@ -577,17 +571,11 @@ async function sellStock(index) {
   if (!canSell >= 1) {
     return;
   }
-  if (canSell >= sellNum) {
-    money +=
-      sellNum * Number(stockValues[index][0][stockValues[index][0].length - 1]);
+  else {
+    let sold = Math.min(canSell, sellNum);
+    money += sold * Number(stockValues[index][0][stockValues[index][0].length - 1]);
     stockValues[index][3] = Number(stockValues[index][3]);
-    stockValues[index][3] -= sellNum;
-  }
-  if (canSell < sellNum) {
-    money +=
-      canSell * Number(stockValues[index][0][stockValues[index][0].length - 1]);
-    stockValues[index][3] = Number(stockValues[index][3]);
-    stockValues[index][3] -= canSell;
+    stockValues[index][3] -= sold;
   }
   const date = new Date();
   if (
